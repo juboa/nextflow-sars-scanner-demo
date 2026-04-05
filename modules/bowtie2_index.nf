@@ -8,7 +8,7 @@ process BOWTIE2_INDEX {
     path genome
 
     output:
-    tuple val(genome.baseName), path("${genome.baseName}.*.bt2")
+    tuple val(genome.baseName), path("${genome.baseName}.*"), emit: index
 
     script:
     """
