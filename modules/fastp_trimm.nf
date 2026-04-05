@@ -1,0 +1,18 @@
+
+process FASTP_TRIMM {
+    tag "$sample_id"
+    publishDir "${params.outdir}/fastp", mode: 'copy'
+    conda "bioconda::fastp"
+    
+    input:
+    tuple val(sample_id), path(reads)
+
+    output:
+    tuple val(sample_id), path("${sample_id}_trimmed_{1,2}.fastq.gz"), emit: trimmed_reads
+    path "${sample_id}*"
+
+    script:
+    """
+    fastp -i ${reads[0]} -I ${reads[1]} -o ${sample_id}_trimmed_1.fastq.gz  -O ${sample_id}_trimmed_2.fastq.gz
+    """
+}

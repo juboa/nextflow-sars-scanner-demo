@@ -1,7 +1,9 @@
 y/
 env/
 work/
-.nextflow/
-.nextflow.log*
-
+.nextflow*
+work/
+results/
+test_results/
+test*
 .env
