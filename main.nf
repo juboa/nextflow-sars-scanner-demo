@@ -17,6 +17,11 @@ include {SAMTOOLS_FAIDX} from './modules/samtools_faidx'
 include {SNPEFF} from './modules/snpeff'
 
 
+include {LOFREQ_FILTER_MAJORITY} from './modules/lofreq_filter_majority'
+include {BEDTOOLS_LOWCOV_MASK} from './modules/bedtools_lowcov_mask'
+include {BCFTOOLS_CONSENSUS} from './modules/bcftools_consensus'
+
+
 workflow {
 
     genome_ch = Channel.fromPath(params.genome)
@@ -36,11 +41,19 @@ workflow {
     ivar_ch = IVAR_TRIMM(arctic_bed_ch, samtools_ch.sorted_bam)
     lofreq_indelqual_ch = LOFREQ_INDELQUAL(genome_ch, ivar_ch.ivar_trim_bam)
     lofreq_cp_ch = LOFREQ_CALL_PARALLEL(genome_ch,faidx_ch.collect(), lofreq_indelqual_ch.lofreq_indelqual_sorted_bam, lofreq_indelqual_ch.lofreq_indelqual_sorted_bam_index)
-    lofreq_filter_out = LOFREQ_FILTER(lofreq_cp_ch.lofreq_indelqual_bam)
-    SNPEFF(genome_ch, lofreq_filter_out.lofreq_filter_vcf)
+    lofreq_filter_out = LOFREQ_FILTER(lofreq_cp_ch.lofreq_indelqual_vcf)
+    snpeff_out = SNPEFF(genome_ch, lofreq_filter_out.lofreq_filter_vcf)
 
 
     // Phase 3 : Consensus genome build and lineage assignation
+    
+    lofreq_filter_majority_out = LOFREQ_FILTER_MAJORITY(snpeff_out.snpeff_vcf)
+    
+    bedtools_lowcov_mask = BEDTOOLS_LOWCOV_MASK(lofreq_indelqual_ch.lofreq_indelqual_sorted_bam)
+
+    BCFTOOLS_CONSENSUS(genome_ch, lofreq_filter_majority_out.lofreq_majority_vcf_gz, bedtools_lowcov_mask.bedtools_lowcov_mask)
+
+
     // Phase 4 : Results aggregation and visualization
 }
 

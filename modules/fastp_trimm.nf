@@ -9,7 +9,7 @@ process FASTP_TRIMM {
 
     output:
     tuple val(sample_id), path("${sample_id}_trimmed_{1,2}.fastq.gz"), emit: trimmed_reads
-    path "${sample_id}*"
+    path "*"
 
     script:
     """

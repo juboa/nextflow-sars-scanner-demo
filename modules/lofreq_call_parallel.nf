@@ -12,7 +12,7 @@ process LOFREQ_CALL_PARALLEL {
     tuple val(sample_id), path(indelqual_bam_index_file)
 
     output:
-    tuple val(sample_id), path("${sample_id}.lofreq.vcf"), emit: lofreq_indelqual_bam
+    tuple val(sample_id), path("${sample_id}.lofreq.vcf"), emit: lofreq_indelqual_vcf
 
     script:
     """

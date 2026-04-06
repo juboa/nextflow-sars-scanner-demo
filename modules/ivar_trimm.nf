@@ -2,7 +2,7 @@
 
 process IVAR_TRIMM {
 	tag "$sample_id"
-    publishDir "${params.outdir}/alignment", mode: 'copy'
+    publishDir "${params.outdir}/ivar", mode: 'copy'
     conda "bioconda::ivar"
     
     input:
