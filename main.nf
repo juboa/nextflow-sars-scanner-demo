@@ -4,6 +4,7 @@ params.reads = "$projectDir/test/SRR17054502_{1,2}.fastq.gz"
 params.outdir = "test_output/"
 
 params.arctic_bed_file = "$projectDir/test/ARTIC_nCoV-2019_v4.bed"
+params.nextclade_db = "$projectDir/test/nextclade_sars2_dataset"
 
 include {BOWTIE2_INDEX} from './modules/bowtie2_index'
 include {FASTP_TRIMM} from './modules/fastp_trimm'
@@ -20,6 +21,8 @@ include {SNPEFF} from './modules/snpeff'
 include {LOFREQ_FILTER_MAJORITY} from './modules/lofreq_filter_majority'
 include {BEDTOOLS_LOWCOV_MASK} from './modules/bedtools_lowcov_mask'
 include {BCFTOOLS_CONSENSUS} from './modules/bcftools_consensus'
+include {PANGOLIN_ASSIGN} from './modules/pangolin_assign'
+include {NEXTCLADE_ASSIGN} from './modules/nextclade_assign'
 
 
 workflow {
@@ -28,6 +31,7 @@ workflow {
     reads_ch = Channel.fromFilePairs(params.reads)
 
     arctic_bed_ch = Channel.value(file(params.arctic_bed_file))
+    nextclade_db_ch = Channel.value(file(params.nextclade_db))
 
     // Phase 1 : prepare index and align reads
     index_out = BOWTIE2_INDEX(genome_ch)
@@ -51,8 +55,10 @@ workflow {
     
     bedtools_lowcov_mask = BEDTOOLS_LOWCOV_MASK(lofreq_indelqual_ch.lofreq_indelqual_sorted_bam)
 
-    BCFTOOLS_CONSENSUS(genome_ch, lofreq_filter_majority_out.lofreq_majority_vcf_gz, bedtools_lowcov_mask.bedtools_lowcov_mask)
+    consensus_fasta = BCFTOOLS_CONSENSUS(genome_ch, lofreq_filter_majority_out.lofreq_majority_vcf_gz, bedtools_lowcov_mask.bedtools_lowcov_mask)
 
+    PANGOLIN_ASSIGN(consensus_fasta.consensus_fasta)
+    NEXTCLADE_ASSIGN(consensus_fasta.consensus_fasta, nextclade_db_ch)
 
     // Phase 4 : Results aggregation and visualization
 }
