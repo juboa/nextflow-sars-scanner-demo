@@ -2,7 +2,7 @@
 
 process LOFREQ_CALL_PARALLEL {
 	tag "$sample_id"
-    publishDir "${params.outdir}/lofreq", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
     conda "bioconda::lofreq"
     
     input:

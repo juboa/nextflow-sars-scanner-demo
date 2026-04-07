@@ -1,6 +1,6 @@
 
 params.genome = "$projectDir/test/NC_045512.2.fasta"
-params.reads = "$projectDir/test/SRR17054502_{1,2}.fastq.gz"
+params.input = "$projectDir/test/*_{1,2}.fastq.gz"
 params.outdir = "test_output/"
 
 params.arctic_bed_file = "$projectDir/test/ARTIC_nCoV-2019_v4.bed"
@@ -27,8 +27,10 @@ include {NEXTCLADE_ASSIGN} from './modules/nextclade_assign'
 
 workflow {
 
-    genome_ch = Channel.fromPath(params.genome)
-    reads_ch = Channel.fromFilePairs(params.reads)
+    genome_ch = Channel.value(file(params.genome))
+    reads_ch = Channel.fromFilePairs(params.input, checkIfExists: true)
+
+    //reads_ch.view { "Found pair: $it" }
 
     arctic_bed_ch = Channel.value(file(params.arctic_bed_file))
     nextclade_db_ch = Channel.value(file(params.nextclade_db))

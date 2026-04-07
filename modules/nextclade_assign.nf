@@ -3,7 +3,7 @@
 process NEXTCLADE_ASSIGN {
 	
 	tag "$sample_id"
-    publishDir "${params.outdir}/nextclade", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/nextclade", mode: 'copy'
     conda "bioconda::nextclade"
 
     input:

@@ -3,7 +3,7 @@
 process BCFTOOLS_CONSENSUS {
 
 	  tag "$sample_id"
-    publishDir "${params.outdir}/bcftools", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/bcftools", mode: 'copy'
     conda "bioconda::bcftools"
     debug true
     

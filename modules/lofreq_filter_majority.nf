@@ -4,7 +4,7 @@ process LOFREQ_FILTER_MAJORITY {
 
 
 	tag "$sample_id"
-    publishDir "${params.outdir}/lofreq", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
     conda "bioconda::lofreq"
     
     input:

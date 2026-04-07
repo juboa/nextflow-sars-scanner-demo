@@ -1,7 +1,8 @@
 
 process BOWTIE2_ALIGN {
     tag "$sample_id"
-    publishDir "${params.outdir}/alignment", mode: 'copy'
+    label "process_high"
+    publishDir "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda "bioconda::bowtie2 bioconda::samtools"
     
     input:
@@ -13,6 +14,6 @@ process BOWTIE2_ALIGN {
 
     script:
     """
-    bowtie2 -x ${index_name} -1 ${reads[0]} -2 ${reads[1]} -S ${sample_id}.sam
+    bowtie2 -x ${index_name} -1 ${reads[0]} -2 ${reads[1]} -S ${sample_id}.sam --threads ${task.cpus}
     """
 }

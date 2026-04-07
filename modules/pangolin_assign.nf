@@ -3,7 +3,7 @@
 process PANGOLIN_ASSIGN {
 	
 	tag "$sample_id"
-    publishDir "${params.outdir}/pangolin", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/pangolin", mode: 'copy'
     conda "bioconda::pangolin"
 
     input:

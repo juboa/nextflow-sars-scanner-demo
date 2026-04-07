@@ -1,7 +1,8 @@
 
 process SAMTOOLS_SORT {
     tag "$sample_id"
-    publishDir "${params.outdir}/alignment", mode: 'copy'
+    label "process_high"
+    publishDir "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda "bioconda::samtools"
     
     input:
@@ -13,7 +14,7 @@ process SAMTOOLS_SORT {
 
     script:
     """
-     samtools sort ${sam_file} -o ${sample_id}.bam
+     samtools sort ${sam_file} -o ${sample_id}.bam -@ ${task.cpus}
      samtools index ${sample_id}.bam
     """
 }

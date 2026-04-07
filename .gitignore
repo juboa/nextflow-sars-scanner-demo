@@ -7,3 +7,4 @@ results/
 test_results/
 test*
 .env
+*log

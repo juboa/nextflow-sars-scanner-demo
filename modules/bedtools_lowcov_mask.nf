@@ -3,7 +3,7 @@
 process BEDTOOLS_LOWCOV_MASK {
 
 	tag "$sample_id"
-    publishDir "${params.outdir}/bedtools", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/bedtools", mode: 'copy'
     conda "bioconda::bedtools"
     
     input:
