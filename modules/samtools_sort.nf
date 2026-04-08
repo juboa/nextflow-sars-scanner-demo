@@ -1,7 +1,7 @@
 
 process SAMTOOLS_SORT {
     tag "$sample_id"
-    label "process_high"
+    label "process_medium"
     publishDir "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda "bioconda::samtools"
     
