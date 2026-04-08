@@ -1,9 +1,8 @@
 
-
 process LOFREQ_INDELQUAL {
-	tag "$sample_id"
+	tag        "$sample_id"
     publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
-    conda "bioconda::lofreq bioconda::samtools"
+    conda      "bioconda::lofreq bioconda::samtools"
     
     input:
     path(genome)

@@ -1,9 +1,10 @@
 
 
 process IVAR_TRIMM {
-	tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/ivar", mode: 'copy'
-    conda "bioconda::ivar"
+	tag 		"$sample_id"
+    label       "process_medium"
+    publishDir 	"${params.outdir}/${sample_id}/ivar", mode: 'copy'
+    conda 		"bioconda::ivar"
     
     input:
     path(arctic_bed)
@@ -14,13 +15,13 @@ process IVAR_TRIMM {
 
     script:
     """
-		    ivar trim \
-			  -i ${bam_file} \
-			  -b ${arctic_bed} \
-			  -p ${sample_id}.ivar.bam \
-			  -e \
-			  -q 0 \
-			  -m 30 \
-			  -s 4
+	    ivar trim \
+		  -i ${bam_file} \
+		  -b ${arctic_bed} \
+		  -p ${sample_id}.ivar.bam \
+		  -e \
+		  -q 0 \
+		  -m 30 \
+		  -s 4
     """
 }

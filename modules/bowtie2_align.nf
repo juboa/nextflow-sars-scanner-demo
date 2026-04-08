@@ -1,9 +1,9 @@
 
 process BOWTIE2_ALIGN {
-    tag "$sample_id"
-    label "process_high"
-    publishDir "${params.outdir}/${sample_id}/alignment", mode: 'copy'
-    conda "bioconda::bowtie2 bioconda::samtools"
+    tag         "$sample_id"
+    label       "process_high"
+    publishDir  "${params.outdir}/${sample_id}/alignment", mode: 'copy'
+    conda       "bioconda::bowtie2 bioconda::samtools"
     
     input:
     tuple val(index_name), path(index_files)

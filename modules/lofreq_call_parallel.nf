@@ -1,9 +1,10 @@
 
 
 process LOFREQ_CALL_PARALLEL {
-	tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
-    conda "bioconda::lofreq"
+    tag         "$sample_id"
+    label       "process_medium"
+    publishDir  "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
+    conda       "bioconda::lofreq"
     
     input:
     path(genome)

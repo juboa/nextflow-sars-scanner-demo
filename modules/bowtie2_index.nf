@@ -1,11 +1,11 @@
 
 
 process BOWTIE2_INDEX {
-	tag "$genome.baseName"
-    conda "bioconda::bowtie2"
+	tag    "$genome.baseName"
+    conda   "bioconda::bowtie2"
     
     input:
-    path genome
+    path(genome)
 
     output:
     tuple val(genome.baseName), path("${genome.baseName}.*"), emit: index

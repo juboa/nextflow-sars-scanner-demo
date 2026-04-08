@@ -1,8 +1,9 @@
 
 process FASTP_TRIMM {
-    tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/fastp", mode: 'copy'
-    conda "bioconda::fastp"
+    tag         "$sample_id"
+    label       "process_medium"
+    publishDir  "${params.outdir}/${sample_id}/fastp", mode: 'copy'
+    conda       "bioconda::fastp"
     
     input:
     tuple val(sample_id), path(reads)

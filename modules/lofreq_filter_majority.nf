@@ -1,11 +1,8 @@
 
-
 process LOFREQ_FILTER_MAJORITY {
-
-
-	tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
-    conda "bioconda::lofreq"
+    tag         "$sample_id"
+    publishDir  "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
+    conda       "bioconda::lofreq"
     
     input:
     tuple val(sample_id), path(lofreq_vcf)
@@ -17,13 +14,13 @@ process LOFREQ_FILTER_MAJORITY {
 
     script:
     """
-        lofreq filter \
-          -i ${lofreq_vcf} \
-          -o "${sample_id}.lofreq.majority.vcf" \
-          --af-min 0.5
+      lofreq filter \
+        -i ${lofreq_vcf} \
+        -o "${sample_id}.lofreq.majority.vcf" \
+        --af-min 0.5
 
-         bgzip -c "${sample_id}.lofreq.majority.vcf" > "${sample_id}.lofreq.majority.vcf.gz"
-         bcftools index "${sample_id}.lofreq.majority.vcf.gz"
+       bgzip -c "${sample_id}.lofreq.majority.vcf" > "${sample_id}.lofreq.majority.vcf.gz"
+       bcftools index "${sample_id}.lofreq.majority.vcf.gz"
          
     """
 }

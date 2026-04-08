@@ -1,10 +1,8 @@
 
-
-
 process SNPEFF {
-	tag "$sample_id"
+    tag        "$sample_id"
     publishDir "${params.outdir}/${sample_id}/snpEFF", mode: 'copy'
-    conda "bioconda::snpeff"
+    conda      "bioconda::snpeff"
     
     input:
     path(genome)

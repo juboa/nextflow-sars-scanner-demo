@@ -1,16 +1,14 @@
 
-
 process PANGOLIN_ASSIGN {
-	
-	tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/pangolin", mode: 'copy'
-    conda "bioconda::pangolin"
+	tag 		"$sample_id"
+    publishDir 	"${params.outdir}/${sample_id}/pangolin", mode: 'copy'
+    conda 		"bioconda::pangolin"
 
     input:
-    	tuple val(sample_id), path(consensus_fasta)
+    tuple val(sample_id), path(consensus_fasta)
 
     output:
-    	tuple val(sample_id), path("${sample_id}.pangolin.csv"), emit: pangolin
+    tuple val(sample_id), path("${sample_id}.pangolin.csv"), emit: pangolin
 
 	script:
 	"""

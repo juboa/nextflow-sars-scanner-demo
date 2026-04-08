@@ -1,9 +1,8 @@
 
-
 process LOFREQ_FILTER {
-	tag "$sample_id"
-    publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
-    conda "bioconda::lofreq"
+	tag         "$sample_id"
+    publishDir  "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
+    conda       "bioconda::lofreq"
     
     input:
     tuple val(sample_id), path(lofreq_vcf)
@@ -19,6 +18,5 @@ process LOFREQ_FILTER {
           --af-min 0.05 \
           --cov-min 20 \
           --sb-incl
-         
     """
 }
