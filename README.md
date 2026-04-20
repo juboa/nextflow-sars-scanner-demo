@@ -1,14 +1,9 @@
 # nextflow-sars-scanner-demo
 > A Nextflow-based pipeline for scanning SARS-CoV-2 genomic data and identifying variants.
 
->  **Disclaimer:** This pipeline is intended for educational and demonstration purposes only.
-
-[![Nextflow](https://img.shields.io/badge/nextflow-%E2%89%A522.10.0-brightgreen)](https://www.nextflow.io/)
-
-
 ## Overview
 
-This pipeline automates the end-to-end analysis of paired-end SARS-CoV-2 FASTQ data. Given raw sequencing reads, it will:
+This pipeline automates the analysis of paired-end SARS-CoV-2 FASTQ data. Given raw sequencing reads, it will:
 
 1. **Trim** low-quality reads and adapters
 2. **Align** reads to the SARS-CoV-2 reference genome
@@ -44,6 +39,11 @@ This fetches the reference dataset required for clade assignment and variant ann
 
 ```bash
 nextclade dataset get --name sars-cov-2 --output-dir nextclade_sars2_dataset
+```
+
+### Step 3 — Download the SARS-CoV-2 reference
+```bash
+wget https://www.ebi.ac.uk/ena/browser/api/fasta/MN908947.3?download=true -O NC_045512.2.fasta
 ```
 
 ---
@@ -89,6 +89,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_1.fas
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
 
 ```
+
 
 ### Step 2 — Run the pipeline
 
