@@ -98,6 +98,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fas
 nextflow run main.nf \
   -profile micromamba \
   --input "samples/*_{1,2}.fastq.gz" \
+  --genome NC_045512.2.fasta \
   --outdir results
 ```
 
