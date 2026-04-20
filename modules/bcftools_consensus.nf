@@ -22,5 +22,8 @@ process BCFTOOLS_CONSENSUS {
             -H A \
             ${majority_vcf} \
             > "${sample_id}.consensus.fasta"
+        
+        sed -i '1s/^>NC_045512.2/>${sample_id}/' "${sample_id}.consensus.fasta"
+
     """
     }
