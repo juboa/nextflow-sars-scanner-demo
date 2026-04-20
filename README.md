@@ -103,7 +103,9 @@ nextflow run main.nf \
   -profile micromamba \
   --input "samples/*_{1,2}.fastq.gz" \
   --genome NC_045512.2.fasta \
-  --outdir results
+  --outdir results \
+  --nextclade_db nextclade_sars2_dataset \
+  --arctic_bed_file ARTIC_nCoV-2019_v4.bed
 ```
 
 ---
