@@ -44,6 +44,7 @@ nextclade dataset get --name sars-cov-2 --output-dir nextclade_sars2_dataset
 ### Step 3 — Download the SARS-CoV-2 reference
 ```bash
 wget https://www.ebi.ac.uk/ena/browser/api/fasta/MN908947.3?download=true -O NC_045512.2.fasta
+sed -i '1s/^>.*/>NC_045512.2/' NC_045512.2.fasta
 ```
 
 ---
