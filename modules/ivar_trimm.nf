@@ -5,6 +5,7 @@ process IVAR_TRIMM {
     label       "process_medium"
     publishDir 	"${params.outdir}/${sample_id}/ivar", mode: 'copy'
     conda 		"bioconda::ivar"
+    container	"staphb/ivar:1.4.4-aligners"
     
     input:
     path(arctic_bed)

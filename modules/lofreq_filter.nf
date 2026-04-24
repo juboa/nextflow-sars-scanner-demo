@@ -3,7 +3,8 @@ process LOFREQ_FILTER {
 	tag         "$sample_id"
     publishDir  "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
     conda       "bioconda::lofreq"
-    
+    container   "nanozoo/lofreq:2.1.5--229539a"
+     
     input:
     tuple val(sample_id), path(lofreq_vcf)
 

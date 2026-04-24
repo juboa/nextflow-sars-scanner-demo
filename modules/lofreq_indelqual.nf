@@ -3,6 +3,7 @@ process LOFREQ_INDELQUAL {
 	tag        "$sample_id"
     publishDir "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
     conda      "bioconda::lofreq bioconda::samtools"
+    container   "nanozoo/lofreq:2.1.5--229539a"
     
     input:
     path(genome)

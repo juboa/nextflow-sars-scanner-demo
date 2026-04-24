@@ -3,7 +3,8 @@ process SNPEFF {
     tag        "$sample_id"
     publishDir "${params.outdir}/${sample_id}/snpEFF", mode: 'copy'
     conda      "bioconda::snpeff"
-    
+    container   "staphb/snpeff"
+
     input:
     path(genome)
     tuple val(sample_id), path(lofreq_filter_vcf)

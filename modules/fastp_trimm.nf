@@ -4,6 +4,8 @@ process FASTP_TRIMM {
     label       "process_medium"
     publishDir  "${params.outdir}/${sample_id}/fastp", mode: 'copy'
     conda       "bioconda::fastp"
+    container   "staphb/fastp"
+
     
     input:
     tuple val(sample_id), path(reads)

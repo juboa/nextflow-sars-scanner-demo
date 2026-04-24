@@ -4,6 +4,7 @@ process BCFTOOLS_CONSENSUS {
     label       "process_medium"
     publishDir  "${params.outdir}/${sample_id}/bcftools", mode: 'copy'
     conda       "bioconda::bcftools"
+    container   "staphb/bcftools"
     
     input:
     path(genome)
