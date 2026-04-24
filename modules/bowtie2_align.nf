@@ -2,7 +2,6 @@
 process BOWTIE2_ALIGN {
     tag         "$sample_id"
     label       "process_high"
-    publishDir  "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda       "bioconda::bowtie2 bioconda::samtools"
     container   "biocontainers/bowtie2:v2.4.1_cv1"
 
