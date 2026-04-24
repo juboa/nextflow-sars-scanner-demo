@@ -5,6 +5,7 @@ process LOFREQ_CALL_PARALLEL {
     label       "process_medium"
     publishDir  "${params.outdir}/${sample_id}/lofreq", mode: 'copy'
     conda       "bioconda::lofreq"
+    container   "nanozoo/lofreq:2.1.5--229539a"
     
     input:
     path(genome)

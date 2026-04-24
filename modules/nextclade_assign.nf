@@ -3,7 +3,8 @@ process NEXTCLADE_ASSIGN {
 	tag 		"$sample_id"
     publishDir 	"${params.outdir}/${sample_id}/nextclade", mode: 'copy'
     conda 		"bioconda::nextclade"
-
+    container   "nextstrain/nextclade"
+    
     input:
     tuple val(sample_id), path(consensus_fasta)
     path(nextclade_sars2_dataset)

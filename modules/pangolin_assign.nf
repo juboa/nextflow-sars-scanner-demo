@@ -3,6 +3,7 @@ process PANGOLIN_ASSIGN {
 	tag 		"$sample_id"
     publishDir 	"${params.outdir}/${sample_id}/pangolin", mode: 'copy'
     conda 		"bioconda::pangolin"
+    container	"staphb/pangolin"
 
     input:
     tuple val(sample_id), path(consensus_fasta)

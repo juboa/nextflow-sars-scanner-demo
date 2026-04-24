@@ -4,7 +4,8 @@ process BOWTIE2_ALIGN {
     label       "process_high"
     publishDir  "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda       "bioconda::bowtie2 bioconda::samtools"
-    
+    container   "biocontainers/bowtie2:v2.4.1_cv1"
+
     input:
     tuple val(index_name), path(index_files)
     tuple val(sample_id), path(reads)

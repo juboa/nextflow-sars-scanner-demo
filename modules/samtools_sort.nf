@@ -4,7 +4,8 @@ process SAMTOOLS_SORT {
     label "process_medium"
     publishDir "${params.outdir}/${sample_id}/alignment", mode: 'copy'
     conda "bioconda::samtools"
-    
+    container   "staphb/samtools"
+
     input:
     tuple val(sample_id), path(sam_file)
 

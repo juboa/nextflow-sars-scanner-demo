@@ -3,7 +3,8 @@
 process BOWTIE2_INDEX {
 	tag    "$genome.baseName"
     conda   "bioconda::bowtie2"
-    
+    container   "biocontainers/bowtie2:v2.4.1_cv1"
+
     input:
     path(genome)
 

@@ -2,6 +2,7 @@
 process SAMTOOLS_FAIDX {
 	tag     "$genome.baseName"
     conda   "bioconda::samtools"
+    container   "staphb/samtools"
     
     input:
     path genome
